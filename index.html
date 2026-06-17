@@ -105,7 +105,87 @@ Enviar
 </button>
 
 </div>
+<script>
 
+const boton = document.querySelector("button");
+const input = document.querySelector("input");
+const chat = document.querySelector(".chat");
+
+boton.addEventListener("click", responder);
+
+input.addEventListener("keypress", function(e){
+
+if(e.key==="Enter"){
+
+responder();
+
+}
+
+});
+
+function responder(){
+
+let pregunta = input.value.trim();
+
+if(pregunta=="") return;
+
+chat.innerHTML += `
+<div style="background:#d9fdd3;
+padding:15px;
+margin-top:15px;
+border-radius:10px;
+text-align:right;">
+${pregunta}
+</div>
+`;
+
+let respuesta = "";
+
+let texto = pregunta.toLowerCase();
+
+if(texto.includes("hola")){
+
+respuesta="¡Hola! 😊 ¿En qué puedo ayudarte sobre tus beneficios?";
+
+}
+
+else if(texto.includes("renov")){
+
+respuesta="Para renovar tu beneficio debes presentar la documentación solicitada dentro del cronograma establecido.";
+
+}
+
+else if(texto.includes("activ")){
+
+respuesta="La activación del beneficio se realiza después de validar los requisitos correspondientes.";
+
+}
+
+else if(texto.includes("document")){
+
+respuesta="Los documentos dependen del tipo de beneficio. Muy pronto el asistente podrá indicarte exactamente cuáles.";
+
+}
+
+else{
+
+respuesta="Todavía estoy aprendiendo 😅. Esa pregunta aún no está registrada.";
+
+}
+
+chat.innerHTML += `
+<div class="bot">
+${respuesta}
+</div>
+`;
+
+input.value="";
+
+window.scrollTo(0,document.body.scrollHeight);
+
+}
+
+</script>
 </body>
 
 </html>
